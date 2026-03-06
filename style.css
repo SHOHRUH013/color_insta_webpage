@@ -1,0 +1,558 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    color: white;
+}
+
+.main-wrapper {
+    background: linear-gradient(-45deg, #0a0a0f, #1a1a2e, #0f1419, #0a0a0f);
+    background-size: 400% 400%;
+    animation: bgShift 20s ease infinite;
+    min-height: 100%;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#stars-container,
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #FFD700;
+    border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite;
+    box-shadow: 0 0 8px #FFD700;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #FFD700 0%, #FFA500 100%);
+    border-radius: 50%;
+    animation: float 12s linear infinite;
+    opacity: 0.5;
+    box-shadow: 0 0 8px #FFD700;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% { opacity: 0.6; }
+    95% { opacity: 0.4; }
+    100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.moon-element {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    width: 120px;
+    height: 120px;
+    z-index: 5;
+}
+
+.moon-circle {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    border-radius: 50%;
+    box-shadow:
+        0 0 40px rgba(255, 215, 0, 0.6),
+        0 0 80px rgba(255, 165, 0, 0.3),
+        inset -40px -40px 40px rgba(0, 0, 0, 0.3);
+    animation: moonPulse 4s ease-in-out infinite;
+    position: relative;
+}
+
+.moon-circle::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    width: 45%;
+    height: 45%;
+    background: rgba(10, 10, 15, 0.4);
+    border-radius: 50%;
+    filter: blur(15px);
+}
+
+@keyframes moonPulse {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+        box-shadow:
+            0 0 40px rgba(255, 215, 0, 0.6),
+            0 0 80px rgba(255, 165, 0, 0.3);
+    }
+    50% {
+        transform: scale(1.05) translateY(-10px);
+        box-shadow:
+            0 0 60px rgba(255, 215, 0, 0.8),
+            0 0 120px rgba(255, 165, 0, 0.5);
+    }
+}
+
+.lantern {
+    position: fixed;
+    width: 50px;
+    height: 70px;
+    animation: sway 5s ease-in-out infinite;
+    z-index: 3;
+}
+
+.lantern-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #FFFFFF 0%, #E8E8E8 30%, #F0F0F0 60%, #FFFFFF 100%);
+    border-radius: 12px 12px 25px 25px;
+    box-shadow:
+        0 0 30px rgba(255, 255, 255, 0.3),
+        inset -5px -5px 15px rgba(0, 0, 0, 0.1),
+        inset 5px 5px 10px rgba(255, 255, 255, 0.5);
+    position: relative;
+}
+
+.lantern-body::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 12px;
+    background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.lantern-glow {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-8deg) translateY(0); }
+    50% { transform: rotate(8deg) translateY(-15px); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.8; transform: translateX(-50%) scale(1.4); }
+}
+
+.lantern-1 { top: 15%; left: 5%; animation-delay: 0s; }
+.lantern-2 { top: 35%; right: 3%; animation-delay: 1.5s; }
+.lantern-3 { bottom: 15%; left: 8%; animation-delay: 3s; }
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow:
+        0 8px 32px 0 rgba(31, 38, 135, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow:
+        0 12px 48px 0 rgba(31, 38, 135, 0.15),
+        inset 0 0 30px rgba(255, 255, 255, 0.1),
+        0 0 30px rgba(255, 215, 0, 0.1);
+}
+
+.ramadan-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 3s ease-in-out infinite;
+    letter-spacing: 2px;
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes titleGlow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4)); }
+    50% { filter: drop-shadow(0 0 30px rgba(255, 165, 0, 0.6)); }
+}
+
+.company-name {
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #00FF88 0%, #00FFD1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 3px;
+    animation: colorShift 4s ease-in-out infinite;
+}
+
+@keyframes colorShift {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.4)); }
+    50% { filter: drop-shadow(0 0 30px rgba(0, 255, 209, 0.6)); }
+}
+
+.logo-glass-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.4rem;
+}
+
+.logo-liquid-glass {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    position: relative;
+    padding: 10px;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,0.28), rgba(255,255,255,0.06));
+    border: 1px solid rgba(255,255,255,0.22);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        inset 0 1px 1px rgba(255,255,255,0.35),
+        inset 0 -10px 20px rgba(255,255,255,0.05),
+        0 0 25px rgba(255,255,255,0.08);
+    overflow: hidden;
+    animation: liquidFloat 4.5s ease-in-out infinite;
+}
+
+.logo-liquid-glass::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 16px;
+    width: 55%;
+    height: 28%;
+    border-radius: 50%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.45),
+        rgba(255,255,255,0.08)
+    );
+    filter: blur(4px);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.logo-liquid-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: inset 0 0 22px rgba(255,255,255,0.10);
+    pointer-events: none;
+}
+
+.logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes liquidFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-6px) scale(1.02);
+    }
+}
+
+.telegram-btn {
+    background: rgba(0, 136, 204, 0.15);
+    border: 2px solid rgba(0, 150, 220, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.telegram-btn:hover {
+    background: rgba(0, 136, 204, 0.25);
+    border-color: rgba(0, 200, 255, 0.8);
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(0, 150, 220, 0.4);
+}
+
+.telegram-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.telegram-btn:hover::before { left: 100%; }
+.telegram-btn > * { position: relative; z-index: 2; }
+
+.map-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.map-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 215, 0, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+}
+
+.map-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.map-btn:hover::before { left: 100%; }
+.map-btn > * { position: relative; z-index: 2; }
+
+.phone-btn {
+    background: rgba(34, 197, 94, 0.15);
+    border: 2px solid rgba(34, 197, 94, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    border-radius: 1.5rem;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.phone-btn:hover {
+    background: rgba(34, 197, 94, 0.25);
+    border-color: rgba(34, 197, 94, 0.8);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.3);
+}
+
+.phone-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.phone-btn:hover::before { left: 100%; }
+.phone-btn > * { position: relative; z-index: 2; }
+
+.pulse-dot {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.relative { position: relative; }
+.z-20 { z-index: 20; }
+.w-full { width: 100%; }
+.max-w-md { max-width: 28rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+.p-8 { padding: 2rem; }
+.p-6 { padding: 1.5rem; }
+.p-5 { padding: 1.25rem; }
+.p-4 { padding: 1rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mt-12 { margin-top: 3rem; }
+.mt-2 { margin-top: 0.5rem; }
+.pb-8 { padding-bottom: 2rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.rounded-3xl { border-radius: 1.5rem; }
+.rounded-2xl { border-radius: 1rem; }
+.rounded-xl { border-radius: 0.75rem; }
+.rounded-lg { border-radius: 0.5rem; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-white { color: white; }
+.text-gray-200 { color: #e5e7eb; }
+.text-gray-300 { color: #d1d5db; }
+.text-gray-400 { color: #9ca3af; }
+.text-gray-500 { color: #6b7280; }
+.text-green-300 { color: #86efac; }
+.text-green-400 { color: #4ade80; }
+.text-yellow-400 { color: #facc15; }
+.text-blue-400 { color: #60a5fa; }
+.text-blue-200 { color: #bfdbfe; }
+.text-yellow-400\/50 { color: rgba(250, 204, 21, 0.5); }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-medium { font-weight: 500; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.flex-col { flex-direction: column; }
+.flex-1 { flex: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+.from-green-500\/10 { --tw-gradient-from: rgba(34, 197, 94, 0.1); }
+.to-emerald-500\/10 { --tw-gradient-to: rgba(16, 185, 129, 0.1); }
+.border { border: 1px solid; }
+.border-green-500\/20 { border-color: rgba(34, 197, 94, 0.2); }
+.w-2 { width: 0.5rem; }
+.h-2 { height: 0.5rem; }
+.w-5 { width: 1.25rem; }
+.h-5 { height: 1.25rem; }
+.w-6 { width: 1.5rem; }
+.h-6 { height: 1.5rem; }
+.w-8 { width: 2rem; }
+.h-8 { height: 2rem; }
+.w-12 { width: 3rem; }
+.h-12 { height: 3rem; }
+.hover\:scale-105:hover { transform: scale(1.05); }
+.transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.15s;
+}
+.bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+.from-blue-500 { --tw-gradient-from: #3b82f6; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.to-blue-600 { --tw-gradient-to: #2563eb; }
+.from-red-500 { --tw-gradient-from: #ef4444; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.to-red-600 { --tw-gradient-to: #dc2626; }
+.bg-green-400 { background-color: #4ade80; }
+.rounded-full { border-radius: 9999px; }
+
+@media (max-width: 640px) {
+    .ramadan-title {
+        font-size: 2.2rem;
+    }
+
+    .company-name {
+        font-size: 3rem;
+    }
+
+    .moon-element {
+        width: 85px;
+        height: 85px;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .logo-liquid-glass {
+        width: 112px;
+        height: 112px;
+    }
+}
